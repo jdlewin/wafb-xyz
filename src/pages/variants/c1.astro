@@ -1,0 +1,30 @@
+---
+import VariantC1 from '../../layouts/VariantC1.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<VariantC1 title="wafb.xyz — C1 (volcano warmth pushed)">
+  <div class="sunband" aria-hidden="true">
+    <svg viewBox="0 0 600 120" width="100%" height="120" preserveAspectRatio="xMidYMid meet">
+      <circle cx="110" cy="60" r="40" fill="#C96F6A" />
+      <circle cx="110" cy="60" r="56" fill="none" stroke="#2E2C29" stroke-width="3" />
+      <circle cx="110" cy="60" r="70" fill="none" stroke="#C96F6A" stroke-width="1.5" />
+      <line x1="210" y1="60" x2="585" y2="60" stroke="#2E2C29" stroke-width="3" />
+      <circle cx="585" cy="60" r="7" fill="#C96F6A" />
+    </svg>
+  </div>
+  <p class="caps">essays — c1 / warmth pushed</p>
+  <h1 class="display">wafb.xyz</h1>
+  <p class="deck">cream paper, coral rules, sun high. the warmest mix.</p>
+  <ul class="essay-list">
+    {essays.map((e) => (
+      <li>
+        <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+        <div class="meta"><time>{e.data.date}</time></div>
+        {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+      </li>
+    ))}
+  </ul>
+</VariantC1>

@@ -1,0 +1,30 @@
+---
+import VariantAC from '../../layouts/VariantAC.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<VariantAC title="wafb.xyz — AC blend (grid + warmth)">
+  <p class="kicker">essays — ac / grid + warmth</p>
+  <div class="sundot" aria-hidden="true">
+    <svg width="44" height="44" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="12" fill="#C96F6A" />
+      <circle cx="22" cy="22" r="19" fill="none" stroke="#111214" stroke-width="2" />
+    </svg>
+    <span>.\ / sun over grid</span>
+  </div>
+  <h1 class="display">wafb.xyz</h1>
+  <ul class="essay-list">
+    {essays.map((e, i) => (
+      <li>
+        <span class="n">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+          <div class="meta"><time>{e.data.date}</time></div>
+          {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</VariantAC>
