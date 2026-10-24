@@ -71,17 +71,19 @@ const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
       .wordmark .dot { color: var(--accent); }
       .gutter .micro {
         font-family: var(--mono);
-        font-size: 0.72rem;
+        font-size: 0.8rem;
         text-transform: lowercase;
         letter-spacing: 0.04em;
         color: var(--muted);
         margin: 0 0 0.5rem;
       }
+      .gutter .specimen { color: var(--ink); }
       .gutter nav { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1rem; }
       .gutter nav a {
         display: block;
         font-family: var(--mono);
-        font-size: 0.75rem;
+        font-weight: 700;
+        font-size: 0.8rem;
         text-transform: lowercase;
         letter-spacing: 0.04em;
         color: var(--ink);
@@ -104,7 +106,7 @@ const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
       }
       .meta {
         font-family: var(--mono);
-        font-size: 0.75rem;
+        font-size: 0.81rem;
         text-transform: lowercase;
         letter-spacing: 0.04em;
         color: var(--muted);
@@ -128,7 +130,7 @@ const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
         margin: 1.5rem 0 0;
         padding-left: 1rem;
         font-family: var(--mono);
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         line-height: 1.6;
         color: var(--ink);
       }
@@ -168,6 +170,7 @@ const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
           <p class="wordmark"><a href="/">wafb.xyz<span class="dot">.</span></a></p>
           <p class="micro">letters, not feeds</p>
           <p class="micro">est. 2026 — durham, nc</p>
+          <p class="micro specimen">0&lt;&gt;[]&#123;&#125; — jetbrains mono</p>
           <nav><a href="/">index</a><a href="/rss.xml">rss</a></nav>
         </div>
       </header>
