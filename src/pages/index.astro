@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<Base title="wafb.xyz — essays">
+  <h1>wafb.xyz</h1>
+  <ul>
+    {essays.map((e) => (
+      <li>
+        <a href={`/essays/${e.slug}/`}>{e.data.title}</a>
+        {' '}<time>{e.data.date}</time>
+        {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+      </li>
+    ))}
+  </ul>
+</Base>

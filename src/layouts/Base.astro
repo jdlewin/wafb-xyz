@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'wafb.xyz — essays' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="alternate" type="application/rss+xml" title="wafb.xyz" href="/rss.xml" />
+    <style>
+      :root { max-width: 42rem; margin: auto; padding: 1rem; font-family: system-ui, sans-serif; line-height: 1.6; }
+      header nav a { margin-right: 1rem; }
+      .pullquote { border-left: 3px solid #333; padding-left: 1rem; font-style: italic; }
+      time { color: #666; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav><a href="/">wafb.xyz</a><a href="/rss.xml">rss</a></nav>
+    </header>
+    <main><slot /></main>
+    <footer><p>wafb.xyz</p></footer>
+  </body>
+</html>
