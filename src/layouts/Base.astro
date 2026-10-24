@@ -1,11 +1,8 @@
 ---
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
-interface Props {
-  title: string;
-  description?: string;
-}
-const { title, description = 'wafb.xyz — essays' } = Astro.props;
+interface Props { title: string; description?: string; }
+const { title, description = 'wafb.xyz — F (sol)' } = Astro.props;
 const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
 ---
 <!doctype html>
@@ -15,167 +12,92 @@ const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="alternate" type="application/rss+xml" title="wafb.xyz" href="/rss.xml" />
     <style is:global define:vars={{ mono }}>
-      :root {
-        --paper: #F4F3EF;
-        --paper-warm: #EDE7D8;
-        --ink: #111214;
-        --muted: #6B675F;
-        --line: #D8D7D3;
-        --accent: #C96F6A;
-      }
+      :root { --paper: #F4E9CF; --ink: #1A1512; --muted: #7A6A50; --line: #D8CBA6; --accent: #C96F6A; --sun: #D4695E; }
       * { box-sizing: border-box; border-radius: 0 !important; }
-      html { background: var(--paper); }
-      body {
-        margin: 0;
-        background: var(--paper);
-        color: var(--ink);
+      html { background: var(--ink); }
+      /* F sol: sun rules the top half — ink sky, coral sun, cream below */
+      body { margin: 0; background: var(--paper); color: var(--ink);
         font-family: Inter, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-        font-size: 1rem;
-        line-height: 1.5;
-        -webkit-font-smoothing: antialiased;
-      }
-      /* film grain, ~4% */
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.04;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-      }
-      .wrap {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 0 1.5rem;
-        max-width: 88rem;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-      /* Grafik L: true left gutter, cols 1-3, hairline right rule */
-      .gutter {
-        grid-column: 1 / span 3;
-        border-right: 1px solid var(--line);
-        padding: 1rem 1.5rem 3rem 0;
-      }
-      .gutter-inner { position: sticky; top: 1rem; }
-      .wordmark {
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        font-size: 1.25rem;
-        line-height: 1;
-        margin: 0 0 1.5rem;
-      }
-      .wordmark a { color: var(--ink); text-decoration: none; }
+        font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+      body::after { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .sky { background: var(--ink); color: var(--paper); }
+      .sky .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1.25rem;
+        max-width: 88rem; margin: 0 auto; padding: 1rem 1.25rem 0; }
+      .sky .ruler { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1.25rem;
+        border-bottom: 2px solid var(--paper); padding: 0 0 0.5rem; opacity: 0.7;
+        font-family: var(--mono); font-size: 0.7rem; }
+      .sky .gutter { grid-column: 1 / span 3; padding: 1.5rem 1.25rem 0 0; }
+      .wordmark { font-weight: 900; letter-spacing: -0.03em; font-size: 1.1rem; margin: 0 0 1.5rem; text-transform: uppercase; }
+      .wordmark a { color: var(--paper); text-decoration: none; }
       .wordmark .dot { color: var(--accent); }
-      .gutter .micro {
-        font-family: var(--mono);
-        font-size: 0.8rem;
-        text-transform: lowercase;
-        letter-spacing: 0.04em;
-        color: var(--muted);
-        margin: 0 0 0.5rem;
-      }
-      .gutter .specimen { color: var(--ink); }
-      .gutter nav { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1rem; }
-      .gutter nav a {
-        display: block;
-        font-family: var(--mono);
-        font-weight: 700;
-        font-size: 0.8rem;
-        text-transform: lowercase;
-        letter-spacing: 0.04em;
-        color: var(--ink);
-        text-decoration: none;
-        margin-bottom: 0.5rem;
-      }
-      .gutter nav a:hover { color: var(--accent); }
-      main {
-        grid-column: 4 / span 9;
-        padding: 10rem 0 8rem;
-      }
-      /* grotesk 900 display — display only */
-      .display {
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        line-height: 0.95;
-        font-size: clamp(3rem, 8vw, 7rem);
-        margin: 0 0 4rem;
-        text-wrap: balance;
-      }
-      .meta {
-        font-family: var(--mono);
-        font-size: 0.81rem;
-        text-transform: lowercase;
-        letter-spacing: 0.04em;
-        color: var(--muted);
-      }
+      .sky nav a { display: block; font-family: var(--mono); font-weight: 700; font-size: 0.8rem;
+        text-transform: uppercase; letter-spacing: 0.1em; color: var(--paper); text-decoration: none; margin-bottom: 0.6rem; }
+      .sky .micro { font-family: var(--mono); font-size: 0.72rem; color: var(--paper); opacity: 0.7;
+        margin: 1.5rem 0 0; text-transform: uppercase; letter-spacing: 0.1em; }
+      .sky .tagline { opacity: 1; font-weight: 700; }
+      .sky main { grid-column: 4 / span 9; padding: 3rem 0 0; }
+      .sky .sunsvg { display: block; width: 100%; height: auto; margin: 0 0 2rem; }
+      .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1.25rem;
+        max-width: 88rem; margin: 0 auto; padding: 0 1.25rem; }
+      .gutter-filler { grid-column: 1 / span 3; border-right: 3px solid var(--ink); }
+      main.body { grid-column: 4 / span 9; padding: 3rem 0 6rem; }
+      .kicker { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.24em;
+        color: var(--paper); background: var(--sun); display: inline-block; padding: 0.35rem 0.7rem; margin: 0 0 1.5rem; }
+      .display { font-weight: 900; letter-spacing: -0.045em; line-height: 0.9;
+        font-size: clamp(3.5rem, 10vw, 8rem); margin: 0 0 3rem; text-transform: lowercase; }
       .essay-list { list-style: none; margin: 0; padding: 0; }
-      .essay-list li {
-        padding: 2.5rem 0;
-        border-top: 1px solid var(--line);
-      }
-      .essay-list a.title {
-        color: var(--ink);
-        text-decoration: none;
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        font-size: clamp(1.75rem, 4vw, 3rem);
-        line-height: 1;
-      }
-      .essay-list a.title:hover { color: var(--accent); }
-      .pullquote {
-        border-left: 3px solid var(--accent);
-        margin: 1.5rem 0 0;
-        padding-left: 1rem;
-        font-family: var(--mono);
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: var(--ink);
-      }
-      article .body { margin-top: 3rem; }
+      .essay-list li { padding: 2rem 0; border-top: 3px solid var(--ink); display: grid; grid-template-columns: 3.5rem 1fr; gap: 0.75rem; }
+      .essay-list .n { font-family: var(--mono); font-size: 1rem; font-weight: 700; color: var(--sun); }
+      .essay-list a.title { color: var(--ink); text-decoration: none; font-weight: 900;
+        letter-spacing: -0.03em; font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1; }
+      .meta { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.6rem; }
+      .pullquote { border-left: 5px solid var(--sun); margin: 1.25rem 0 0; padding-left: 1rem;
+        font-family: var(--mono); font-size: 0.86rem; line-height: 1.6; color: var(--ink); }
+      article .body { margin-top: 2.5rem; overflow-wrap: anywhere; word-break: break-word; }
+      article .body p, article .body li { font-family: var(--mono); font-weight: 400; font-size: 0.95rem; line-height: 1.65; }
       article .body p { margin: 0 0 1.5rem; }
-      article .body a { color: var(--accent); }
-      time { color: var(--muted); }
-      .back { margin-top: 5rem; }
-      .back a { color: var(--muted); text-decoration: none; font-family: var(--mono); font-size: 0.8rem; }
-      .back a:hover { color: var(--accent); }
-      /* volcano micro-caps footer, full-width hairline */
-      footer {
-        grid-column: 1 / -1;
-        border-top: 1px solid var(--line);
-        padding: 1.5rem 0 3rem;
-        display: flex;
-        justify-content: space-between;
-        font-family: var(--mono);
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--muted);
-      }
-      footer .accent { color: var(--accent); }
+      article .body a { color: var(--sun); }
+      article .body h2 { font-weight: 900; letter-spacing: -0.03em; font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+      .back { margin-top: 4rem; border-top: 3px solid var(--ink); padding-top: 1rem; }
+      .back a { color: var(--muted); text-decoration: none; font-family: var(--mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+      footer { grid-column: 1 / -1; border-top: 3px solid var(--ink); padding: 1.25rem 0 2.5rem;
+        display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.24em; color: var(--ink); }
+      footer .accent { color: var(--sun); }
       @media (max-width: 60rem) {
-        .gutter { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--line); padding: 1rem 0; }
-        .gutter-inner { position: static; }
-        .gutter nav a { display: inline; margin-right: 1.25rem; }
-        main { grid-column: 1 / -1; padding: 5rem 0 4rem; }
+        .sky .ruler { display: none; }
+        .sky .gutter { grid-column: 1 / -1; }
+        .sky main { grid-column: 1 / -1; }
+        .gutter-filler { display: none; }
+        main.body { grid-column: 1 / -1; }
       }
     </style>
   </head>
   <body>
+    <div class="sky"><div class="wrap">
+      <div class="ruler" aria-hidden="true">
+        <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span>
+      </div>
+      <header class="gutter"><div class="gutter-inner">
+        <p class="wordmark"><a href="/">wafb.xyz<span class="dot">.</span></a></p>
+        <nav><a href="/">index</a><a href="/rss.xml">rss</a></nav>
+        <p class="micro tagline">letters, not feeds</p>
+        <p class="micro">est. 2026<br />durham, nc</p>
+      </div></header>
+      <main>
+        <svg class="sunsvg" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle cx="300" cy="190" r="120" fill="#C96F6A" />
+          <circle cx="300" cy="190" r="150" fill="none" stroke="#F4E9CF" stroke-width="3" />
+          <line x1="40" y1="190" x2="560" y2="190" stroke="#F4E9CF" stroke-width="3" />
+        </svg>
+      </main>
+    </div></div>
     <div class="wrap">
-      <header class="gutter">
-        <div class="gutter-inner">
-          <p class="wordmark"><a href="/">wafb.xyz<span class="dot">.</span></a></p>
-          <p class="micro">letters, not feeds</p>
-          <p class="micro">est. 2026 — durham, nc</p>
-          <p class="micro specimen">0&lt;&gt;[]&#123;&#125; — jetbrains mono</p>
-          <nav><a href="/">index</a><a href="/rss.xml">rss</a></nav>
-        </div>
-      </header>
-      <main><slot /></main>
-      <footer><span>wafb.xyz</span><span class="accent">letters, not feeds</span></footer>
+      <div class="gutter-filler" aria-hidden="true"></div>
+      <main class="body"><slot /></main>
+      <footer><span>wafb.xyz — f / sol</span><span class="accent">sun over grid</span></footer>
     </div>
   </body>
 </html>
