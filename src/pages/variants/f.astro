@@ -1,0 +1,23 @@
+---
+import VariantF from '../../layouts/VariantF.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<VariantF title="wafb.xyz — F (sol)">
+  <p class="kicker">essays — f / sol</p>
+  <h1 class="display">wafb.xyz</h1>
+  <ul class="essay-list">
+    {essays.map((e, i) => (
+      <li>
+        <span class="n">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+          <div class="meta"><time>{e.data.date}</time></div>
+          {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</VariantF>

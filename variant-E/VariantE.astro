@@ -1,0 +1,82 @@
+---
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/700.css';
+interface Props { title: string; description?: string; }
+const { title, description = 'wafb.xyz — E (grid iron)' } = Astro.props;
+const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <style is:global define:vars={{ mono }}>
+      :root { --paper: #F4F3EF; --ink: #111214; --muted: #6B675F; --line: #D8D7D3; --accent: #C96F6A; }
+      * { box-sizing: border-box; border-radius: 0 !important; }
+      html { background: var(--paper); }
+      body { margin: 0; background: var(--paper); color: var(--ink);
+        font-family: Inter, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+        font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+      body::after { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      /* E grid-iron: heaviest lines — 3px everywhere, double ruler */
+      .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1rem;
+        max-width: 88rem; margin: 0 auto; padding: 0 1rem; }
+      .ruler { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1rem;
+        border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); padding: 0.5rem 0;
+        font-family: var(--mono); font-size: 0.7rem; font-weight: 700; color: var(--ink); margin-top: 1rem; }
+      .gutter { grid-column: 1 / span 3; border-right: 3px solid var(--ink); padding: 1.5rem 1rem 3rem 0; }
+      .gutter-inner { position: sticky; top: 1rem; }
+      .wordmark { font-weight: 900; letter-spacing: -0.03em; font-size: 1.2rem; margin: 0; text-transform: uppercase;
+        border-bottom: 3px solid var(--ink); padding-bottom: 1rem; }
+      .wordmark a { color: var(--ink); text-decoration: none; }
+      .wordmark .dot { color: var(--accent); }
+      .gutter nav { border-bottom: 3px solid var(--ink); padding: 1rem 0; }
+      .gutter nav a { display: block; font-family: var(--mono); font-weight: 700; font-size: 0.85rem;
+        text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); text-decoration: none; margin-bottom: 0.6rem; }
+      .gutter .micro { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; color: var(--ink);
+        margin: 1rem 0 0; text-transform: uppercase; letter-spacing: 0.1em; }
+      main { grid-column: 4 / span 9; padding: 4rem 0 5rem; }
+      .kicker { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.24em;
+        border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); padding: 0.6rem 0; margin: 0 0 2rem; }
+      .display { font-weight: 900; letter-spacing: -0.045em; line-height: 0.88;
+        font-size: clamp(4rem, 11vw, 9rem); margin: 0; text-transform: lowercase;
+        border-bottom: 3px solid var(--ink); padding-bottom: 2rem; }
+      .essay-list { list-style: none; margin: 0; padding: 0; }
+      .essay-list li { padding: 1.75rem 0; border-bottom: 3px solid var(--ink); display: grid; grid-template-columns: 4.5rem 1fr; gap: 0.75rem; }
+      .essay-list .n { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--ink); line-height: 1; }
+      .essay-list .n::after { content: ""; display: block; width: 2rem; height: 0.5rem; background: var(--accent); margin-top: 0.5rem; }
+      .essay-list a.title { color: var(--ink); text-decoration: none; font-weight: 900;
+        letter-spacing: -0.03em; font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1; }
+      .meta { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.6rem; }
+      .pullquote { border-left: 5px solid var(--ink); border-top: 1px solid var(--line); margin: 1.25rem 0 0; padding: 0.75rem 0 0 1rem;
+        font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; color: var(--ink); }
+      .pullquote b { color: var(--accent); }
+      footer { grid-column: 1 / -1; border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); padding: 1rem 0 2rem; margin-bottom: 2rem;
+        display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink); }
+      footer .accent { color: var(--accent); }
+      @media (max-width: 60rem) {
+        .ruler { display: none; }
+        .gutter { grid-column: 1 / -1; border-right: 0; border-bottom: 3px solid var(--ink); }
+        main { grid-column: 1 / -1; padding: 2.5rem 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="ruler" aria-hidden="true">
+        <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span>
+      </div>
+      <header class="gutter"><div class="gutter-inner">
+        <p class="wordmark"><a href="/">wafb.xyz<span class="dot">.</span></a></p>
+        <nav><a href="/">index</a><a href="/rss.xml">rss</a></nav>
+        <p class="micro">est. 2026 — durham, nc</p>
+      </div></header>
+      <main><slot /></main>
+      <footer><span>wafb.xyz — e / grid iron</span><span class="accent">lines hold</span></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+---
+import VariantD from '../../layouts/VariantD.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<VariantD title="wafb.xyz — D (ember)">
+  <div class="emberband" aria-hidden="true">
+    <svg viewBox="0 0 600 140" preserveAspectRatio="xMidYMid meet">
+      <circle cx="300" cy="70" r="52" fill="#111214" />
+      <circle cx="300" cy="70" r="52" fill="none" stroke="#F4F3EF" stroke-width="2" />
+      <circle cx="300" cy="70" r="30" fill="#C96F6A" />
+      <line x1="60" y1="70" x2="220" y2="70" stroke="#111214" stroke-width="4" />
+      <line x1="380" y1="70" x2="540" y2="70" stroke="#111214" stroke-width="4" />
+    </svg>
+  </div>
+  <p class="kicker">essays — d / ember</p>
+  <h1 class="display">wafb.xyz</h1>
+  <ul class="essay-list">
+    {essays.map((e, i) => (
+      <li>
+        <span class="n">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+          <div class="meta"><time>{e.data.date}</time></div>
+          {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</VariantD>
