@@ -11,15 +11,10 @@ The iPhone Duo is a first-generation foldable that trades camera quality and out
 
 ## Sources
 
-**Transcripts:**
-- `/Users/lawrence/.hermes/profiles/marty/cache/scratch/vergecast_transcript.txt` — Main Vergecast episode discussing iPhone Duo launch impressions and technical details (Gruber refs: 03:38, 10:45, 12:35, 25:17)
-- `/Users/lawrence/.hermes/profiles/marty/cache/scratch/vergecast_launch.txt` — Vergecast launch episode with initial hands-on and editor reactions
-- `/Users/lawrence/.hermes/profiles/marty/cache/scratch/vergecast_duo_feelings.txt` — Deeper review discussion covering form factor and app ecosystem concerns
-
-**YouTube Videos:**
-- `ci1RAWKbtLw` — Vergecast iPhone Duo launch coverage
-- `tuN5h65fhBk` — iPhone Duo review discussion
-- `HqxRJft0_4I` — Additional Vergecast segment on foldable ecosystem
+**Vergecast episodes:**
+- [Vergecast: iPhone Duo launch impressions](https://www.youtube.com/watch?v=ci1RAWKbtLw) — launch coverage and technical details (Gruber refs: 03:38, 10:45, 12:35, 25:17)
+- [Vergecast: iPhone Duo review discussion](https://www.youtube.com/watch?v=tuN5h65fhBk) — hands-on and editor reactions
+- [Vergecast: the foldable ecosystem](https://www.youtube.com/watch?v=HqxRJft0_4I) — form factor and app ecosystem concerns
 
 **Key Pull-Quotes from Gruber:**
 - On the outer display trade-offs: "fact, we should come back to John Gruber's feelings about the cover display"
