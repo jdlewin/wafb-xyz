@@ -14,17 +14,133 @@ const { title, description = 'wafb.xyz — essays' } = Astro.props;
     <meta name="description" content={description} />
     <link rel="alternate" type="application/rss+xml" title="wafb.xyz" href="/rss.xml" />
     <style>
-      :root { max-width: 42rem; margin: auto; padding: 1rem; font-family: system-ui, sans-serif; line-height: 1.6; }
-      header nav a { margin-right: 1rem; }
-      .pullquote { border-left: 3px solid #333; padding-left: 1rem; font-style: italic; }
-      time { color: #666; }
+      :root {
+        --paper: #F4F3EF;
+        --paper-warm: #EDE7D8;
+        --ink: #111214;
+        --muted: #6B675F;
+        --line: #D8D7D3;
+        --accent: #C96F6A;
+      }
+      * { box-sizing: border-box; border-radius: 0 !important; }
+      html { background: var(--paper); }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      /* film grain, ~4% */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .wrap {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 0 1.5rem;
+        max-width: 88rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      /* micro lowercase header */
+      .masthead {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--line);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.75rem;
+        text-transform: lowercase;
+        letter-spacing: 0.04em;
+      }
+      .masthead a { color: var(--ink); text-decoration: none; margin-left: 1.25rem; }
+      .masthead a:first-child { margin-left: 0; }
+      .masthead a:hover { color: var(--accent); }
+      .masthead .dot { color: var(--accent); }
+      main {
+        grid-column: 4 / span 9;
+        padding: 10rem 0 8rem;
+      }
+      /* grotesk 900 display */
+      .display {
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
+        font-size: clamp(3rem, 8vw, 7rem);
+        margin: 0 0 4rem;
+        text-wrap: balance;
+      }
+      .meta {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.75rem;
+        text-transform: lowercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+      .essay-list { list-style: none; margin: 0; padding: 0; }
+      .essay-list li {
+        padding: 2.5rem 0;
+        border-top: 1px solid var(--line);
+      }
+      .essay-list a.title {
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        font-size: clamp(1.75rem, 4vw, 3rem);
+        line-height: 1;
+      }
+      .essay-list a.title:hover { color: var(--accent); }
+      .pullquote {
+        border-left: 3px solid var(--accent);
+        margin: 1.5rem 0 0;
+        padding-left: 1rem;
+        font-style: italic;
+        color: var(--ink);
+      }
+      article .body { margin-top: 3rem; }
+      article .body p { margin: 0 0 1.5rem; }
+      article .body a { color: var(--accent); }
+      time { color: var(--muted); }
+      .back { margin-top: 5rem; }
+      .back a { color: var(--muted); text-decoration: none; font-family: ui-monospace, Menlo, monospace; font-size: 0.8rem; }
+      .back a:hover { color: var(--accent); }
+      /* volcano micro-caps footer */
+      footer {
+        grid-column: 1 / -1;
+        border-top: 1px solid var(--line);
+        padding: 1.5rem 0 3rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--muted);
+      }
+      footer .accent { color: var(--accent); }
+      @media (max-width: 60rem) {
+        main { grid-column: 1 / -1; padding: 5rem 0 4rem; }
+      }
     </style>
   </head>
   <body>
-    <header>
-      <nav><a href="/">wafb.xyz</a><a href="/rss.xml">rss</a></nav>
-    </header>
-    <main><slot /></main>
-    <footer><p>wafb.xyz</p></footer>
+    <div class="wrap">
+      <header class="masthead">
+        <nav><a href="/">wafb.xyz<span class="dot">.</span></a></nav>
+        <nav><a href="/rss.xml">rss</a></nav>
+      </header>
+      <main><slot /></main>
+      <footer><span>wafb.xyz</span><span class="accent">letters, not feeds</span></footer>
+    </div>
   </body>
 </html>

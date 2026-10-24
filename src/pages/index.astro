@@ -6,12 +6,12 @@ const essays = (await getCollection('essays', ({ data }) => data.publish === tru
   .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
 ---
 <Base title="wafb.xyz — essays">
-  <h1>wafb.xyz</h1>
-  <ul>
+  <h1 class="display">wafb.xyz</h1>
+  <ul class="essay-list">
     {essays.map((e) => (
       <li>
-        <a href={`/essays/${e.slug}/`}>{e.data.title}</a>
-        {' '}<time>{e.data.date}</time>
+        <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+        <div class="meta"><time>{e.data.date}</time></div>
         {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
       </li>
     ))}

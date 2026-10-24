@@ -15,10 +15,10 @@ const { Content } = await entry.render();
 ---
 <Base title={entry.data.title} description={entry.data.description}>
   <article>
-    <h1>{entry.data.title}</h1>
-    <time>{entry.data.date}</time>
+    <h1 class="display">{entry.data.title}</h1>
+    <div class="meta"><time>{entry.data.date}</time></div>
     {entry.data.pullquote && <blockquote class="pullquote">{entry.data.pullquote}</blockquote>}
-    <Content />
+    <div class="body"><Content /></div>
   </article>
-  <p><a href="/">← all essays</a></p>
+  <p class="back"><a href="/">← all essays</a></p>
 </Base>
