@@ -1,0 +1,28 @@
+---
+import VariantC from '../../layouts/VariantC.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('essays', ({ data }) => data.publish === true))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<VariantC title="wafb.xyz — variant C (volcano)">
+  <div class="sunband" aria-hidden="true">
+    <svg viewBox="0 0 600 90" width="100%" height="90" preserveAspectRatio="xMidYMid meet">
+      <circle cx="90" cy="45" r="30" fill="#C96F6A" />
+      <circle cx="90" cy="45" r="44" fill="none" stroke="#2E2C29" stroke-width="2" />
+      <line x1="170" y1="45" x2="590" y2="45" stroke="#2E2C29" stroke-width="2" />
+      <circle cx="580" cy="45" r="6" fill="#2E2C29" />
+    </svg>
+  </div>
+  <p class="caps">essays — variant c / volcano-led</p>
+  <h1 class="display">wafb.xyz</h1>
+  <ul class="essay-list">
+    {essays.map((e) => (
+      <li>
+        <a class="title" href={`/essays/${e.slug}/`}>{e.data.title}</a>
+        <div class="meta"><time>{e.data.date}</time></div>
+        {e.data.pullquote && <p class="pullquote">{e.data.pullquote}</p>}
+      </li>
+    ))}
+  </ul>
+</VariantC>

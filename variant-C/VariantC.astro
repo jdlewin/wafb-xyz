@@ -1,0 +1,76 @@
+---
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/700.css';
+interface Props { title: string; description?: string; }
+const { title, description = 'wafb.xyz — variant C (volcano)' } = Astro.props;
+const mono = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <style is:global define:vars={{ mono }}>
+      :root { --paper: #EDE7D8; --paper-hi: #F4F3EF; --ink: #2E2C29; --muted: #6B675F; --line: #D5CDB8; --accent: #C96F6A; }
+      * { box-sizing: border-box; border-radius: 0 !important; }
+      html { background: var(--paper); }
+      body { margin: 0; background: var(--paper); color: var(--ink);
+        font-family: Inter, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+        font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+      body::after { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+      .wrap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 1.5rem;
+        max-width: 88rem; margin: 0 auto; padding: 0 1.5rem; }
+      /* C: warm gutter, tracked caps */
+      .gutter { grid-column: 1 / span 3; border-right: 1px solid var(--line); padding: 1.5rem 1.5rem 3rem 0; }
+      .gutter-inner { position: sticky; top: 1.5rem; }
+      .initials { font-style: italic; font-weight: 900; font-size: 2rem; letter-spacing: -0.04em;
+        margin: 0 0 0.25rem; color: var(--ink); }
+      .initials .dot { color: var(--accent); font-style: normal; }
+      .wordmark { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+        letter-spacing: 0.3em; margin: 0 0 2rem; color: var(--ink); }
+      .gutter nav a { display: block; font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase;
+        letter-spacing: 0.3em; color: var(--ink); text-decoration: none; margin-bottom: 0.75rem; }
+      .gutter nav a:hover { color: var(--accent); }
+      .gutter .micro { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+        letter-spacing: 0.3em; color: var(--muted); margin: 2rem 0 0; line-height: 2; }
+      main { grid-column: 4 / span 9; padding: 6rem 0 8rem; }
+      /* C: duotone illust hero hint — sun band */
+      .sunband { margin: 0 0 3rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.5rem 0; }
+      .caps { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+        letter-spacing: 0.34em; color: var(--muted); margin: 0 0 3rem; }
+      .display { font-weight: 900; letter-spacing: -0.04em; line-height: 0.95;
+        font-size: clamp(3rem, 8vw, 7rem); margin: 0 0 4rem; }
+      .essay-list { list-style: none; margin: 0; padding: 0; }
+      .essay-list li { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+      .essay-list a.title { color: var(--ink); text-decoration: none; font-weight: 900;
+        letter-spacing: -0.03em; font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1; }
+      .essay-list a.title:hover { color: var(--accent); }
+      .meta { font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted); margin-top: 0.75rem; }
+      .pullquote { border-left: 3px solid var(--accent); margin: 1.5rem 0 0; padding-left: 1rem;
+        font-family: var(--mono); font-size: 0.88rem; line-height: 1.6; color: var(--ink); }
+      footer { grid-column: 1 / -1; border-top: 1px solid var(--line); padding: 1.5rem 0 3rem;
+        display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.7rem;
+        text-transform: uppercase; letter-spacing: 0.34em; color: var(--muted); }
+      footer .accent { color: var(--accent); }
+      @media (max-width: 60rem) {
+        .gutter { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--line); }
+        main { grid-column: 1 / -1; padding: 4rem 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="gutter"><div class="gutter-inner">
+        <p class="initials">w<span class="dot">.</span></p>
+        <p class="wordmark">wafb.xyz</p>
+        <nav><a href="/">index</a><a href="/rss.xml">rss</a></nav>
+        <p class="micro">est. 2026<br />durham, nc</p>
+      </div></header>
+      <main><slot /></main>
+      <footer><span>wafb.xyz — variant c</span><span class="accent">tropical modern duotone</span></footer>
+    </div>
+  </body>
+</html>
