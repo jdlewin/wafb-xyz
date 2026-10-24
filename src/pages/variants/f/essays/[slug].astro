@@ -1,0 +1,25 @@
+---
+import VariantF from '../../../../layouts/VariantF.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays', ({ data }) => data.publish === true);
+  return essays.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<VariantF title={`${entry.data.title} — wafb.xyz`} description={entry.data.description}>
+  <article>
+  <p class="kicker">essay — f / sol</p>
+  <h1 class="display">{entry.data.title}</h1>
+  <div class="meta"><time>{entry.data.date}</time></div>
+  {entry.data.pullquote && <blockquote class="pullquote">{entry.data.pullquote}</blockquote>}
+  <div class="body"><Content /></div>
+  </article>
+  <p class="back"><a href="/variants/f/">← all essays</a></p>
+</VariantF>
